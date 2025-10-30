@@ -2,7 +2,7 @@ import React from 'react'
 import Hero from '../components/Hero'
 import JobListing from '../components/JobListing'
 import ViewAllJobs from '../components/ViewAllJobs'
-import DevsAndEmployes from '../components/devsAndEmployes.jsx'
+import DevsAndEmployes from '../components/DevsAndEmployes.jsx'
 
 const HomePage = () => {
   return (
