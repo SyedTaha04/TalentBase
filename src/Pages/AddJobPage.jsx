@@ -1,10 +1,8 @@
 import React from 'react'
-import {useState} from 'react'
-import {Link} from 'react-router-dom'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const AddJob = () => {
-  const navigate = useNavigate();
+const AddJobPage = () => {
     const [jobType, setJobType] = useState('Full-Time');
     const [jobTitle, setJobTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -14,54 +12,56 @@ const AddJob = () => {
     const [companyDescription, setCompanyDescription] = useState('');
     const [contactEmail, setContactEmail] = useState('');
     const [contactPhone, setContactPhone] = useState('');
-    const handleClick = async (e) =>
-    {
-        e.preventDefault();
-        await AddJobs();
-        
-    }
-   
-    const AddJobs = async () => 
-    {
-        const newJob = {
-            "type":jobType,
-            "title":jobTitle,
-            "description":description,
-            "salary":salary,
-            "location":location,
-            company: {
-            "name":companyName,
-            "description":companyDescription,
-            "contactEmail":contactEmail,
-            "contactPhone":contactPhone
+    const navigate = useNavigate();
+    const handleSubmit = (e) => 
+        {
+            e.preventDefault();
+            submitData();
+        }
+        const submitData = async () =>
+        {
+            const addJob = {
+                'type': jobType,
+                'title': jobTitle,
+                'description': description,
+                'salary': salary,
+                'location': location,
+                'company': {
+                'name': companyName,
+                'description': companyDescription,
+                'contactEmail': contactEmail,
+                'contactPhone': contactPhone
+                }
+                };
+                try
+                {
+                    const response = await fetch('/api/jobs', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    
+                    body: JSON.stringify(addJob),
+                    
+                    
+
+                });
+                if (response.ok)
+                {
+                    alert('Job added successfully!');
+                    navigate('/jobs');
+
+                }
+
+                }
+                catch(error)
+                {
+                    console.error('Error adding job:', error);
+
+                }       
+            
             }
-        };
         
-        try
-       {
-        const response = await fetch('/api/jobs',{
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(newJob)   
-        });
-        const data = await response.json();
-        
-        navigate('/jobs');
-       }
-       catch 
-       {
-          console.log("Error adding job");
-
-       }
-        
-
-    }
-    
-
-
-
   return (
    <>
    <section className="bg-indigo-50">
@@ -69,11 +69,11 @@ const AddJob = () => {
         <div
           className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0"
         >
-          <form onSubmit={handleClick}>
+          <form onSubmit={handleSubmit}>
             <h2 className="text-3xl text-center font-semibold mb-6">Add Job</h2>
 
             <div className="mb-4">
-              <label htmlFor="type" className="block text-gray-700 font-bold mb-2"
+              <label for="type" className="block text-gray-700 font-bold mb-2"
                 >Job Type</label
               >
               <select
@@ -82,7 +82,7 @@ const AddJob = () => {
                 className="border rounded w-full py-2 px-3"
                 required
                 value={jobType}
-                onChange={(e)=>setJobType(e.target.value)}
+                onChange={(e) => setJobType(e.target.value)}
               >
                 <option value="Full-Time">Full-Time</option>
                 <option value="Part-Time">Part-Time</option>
@@ -103,12 +103,12 @@ const AddJob = () => {
                 placeholder="eg. Beautiful Apartment In Miami"
                 required
                 value={jobTitle}
-                 onChange={(e)=>setJobTitle(e.target.value)}
+                onChange={(e) => setJobTitle(e.target.value)}
               />
             </div>
             <div className="mb-4">
               <label
-                htmlFor="description"
+                for="description"
                 className="block text-gray-700 font-bold mb-2"
                 >Description</label
               >
@@ -119,12 +119,12 @@ const AddJob = () => {
                 rows="4"
                 placeholder="Add any job duties, expectations, requirements, etc"
                 value={description}
-                 onChange={(e)=>setDescription(e.target.value)}
+                onChange={(e) => setDescription(e.target.value)}
               ></textarea>
             </div>
 
             <div className="mb-4">
-              <label htmlFor="type" className="block text-gray-700 font-bold mb-2"
+              <label for="type" className="block text-gray-700 font-bold mb-2"
                 >Salary</label
               >
               <select
@@ -133,7 +133,7 @@ const AddJob = () => {
                 className="border rounded w-full py-2 px-3"
                 required
                 value={salary}
-                 onChange={(e)=>setSalary(e.target.value)}
+                onChange={(e) => setSalary(e.target.value)}
               >
                 <option value="Under $50K">Under $50K</option>
                 <option value="$50K - 60K">$50K - $60K</option>
@@ -161,14 +161,14 @@ const AddJob = () => {
                 placeholder='Company Location'
                 required 
                 value={location}
-                onChange={(e)=>setLocation(e.target.value)}          
+                onChange={(e) => setLocation(e.target.value)}          
               />
             </div>
 
             <h3 className="text-2xl mb-5">Company Info</h3>
 
             <div className="mb-4">
-              <label htmlFor="company" className="block text-gray-700 font-bold mb-2"
+              <label for="company" className="block text-gray-700 font-bold mb-2"
                 >Company Name</label
               >
               <input
@@ -178,13 +178,13 @@ const AddJob = () => {
                 className="border rounded w-full py-2 px-3"
                 placeholder="Company Name"
                 value={companyName}
-                onChange={(e)=>setCompanyName(e.target.value)}
+                onChange={(e) => setCompanyName(e.target.value)}
               />
             </div>
 
             <div className="mb-4">
               <label
-                htmlFor="company_description"
+                for="company_description"
                 className="block text-gray-700 font-bold mb-2"
                 >Company Description</label
               >
@@ -195,13 +195,13 @@ const AddJob = () => {
                 rows="4"
                 placeholder="What does your company do?"
                 value={companyDescription}
-                onChange={(e)=>setCompanyDescription(e.target.value)}
+                onChange={(e) => setCompanyDescription(e.target.value)}
               ></textarea>
             </div>
 
             <div className="mb-4">
               <label
-                htmlFor="contact_email"
+                for="contact_email"
                 className="block text-gray-700 font-bold mb-2"
                 >Contact Email</label
               >
@@ -210,15 +210,15 @@ const AddJob = () => {
                 id="contact_email"
                 name="contact_email"
                 className="border rounded w-full py-2 px-3"
-                placeholder="Email address htmlFor applicants"
+                placeholder="Email address for applicants"
                 required
                 value={contactEmail}
-                onChange={(e)=>setContactEmail(e.target.value)}
+                onChange={(e) => setContactEmail(e.target.value)}
               />
             </div>
             <div className="mb-4">
               <label
-                htmlFor="contact_phone"
+                for="contact_phone"
                 className="block text-gray-700 font-bold mb-2"
                 >Contact Phone</label
               >
@@ -227,9 +227,9 @@ const AddJob = () => {
                 id="contact_phone"
                 name="contact_phone"
                 className="border rounded w-full py-2 px-3"
-                placeholder="Optional phone htmlFor applicants"
+                placeholder="Optional phone for applicants"
                 value={contactPhone}
-                onChange={(e)=>setContactPhone(e.target.value)}
+                onChange={(e) => setContactPhone(e.target.value)}
               />
             </div>
 
@@ -249,4 +249,4 @@ const AddJob = () => {
   )
 }
 
-export default AddJob
+export default AddJobPage

@@ -11,16 +11,15 @@ const Hero = () => {
           <h1
             className="text-4xl font-extrabold text-white sm:text-5xl md:text-6xl"
           >
-            Become a React Dev
+            Find the Job That Fits You
           </h1>
           <p className="my-4 text-xl text-white">
-            Find the React job that fits your skills and needs
+            Discover opportunities that match your skills, goals, and passion — all in one place.
           </p>
         </div>
       </div>
     </section>
     </>
-    
   )
 }
 

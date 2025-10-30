@@ -1,17 +1,18 @@
 import React from 'react'
-import Hero from '../components/Hero.jsx'
-import HomeCards from '../components/HomeCards.jsx'
-import JobListings from '../components/JobListing.jsx'
-import ViewAllJobs from '../components/ViewAllJobs.jsx'
+import Hero from '../components/Hero'
+import JobListing from '../components/JobListing'
+import ViewAllJobs from '../components/ViewAllJobs'
+import DevsAndEmployes from '../components/devsAndEmployes.jsx'
 
 const HomePage = () => {
   return (
-    <>
-      <Hero />
-      <HomeCards />
-      <JobListings limit={3} />
-      <ViewAllJobs />
-    </>
+   <>
+   <Hero />
+   <DevsAndEmployes />
+   <JobListing limit={3} heading="Browse Jobs" />
+   <ViewAllJobs />
+
+   </>
   )
 }
 
