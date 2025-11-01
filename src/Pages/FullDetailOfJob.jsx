@@ -16,7 +16,7 @@ const FullDetailOfJob = () => {
     {
       try
       {
-        const response = await fetch(`/api/jobs/${id}`)
+        const response = await fetch(`https://jsonserver-talentbase.onrender.com/jobs${id}`)
         const data = await response.json();
         setJobDetails(data);         
       }
@@ -37,7 +37,7 @@ const FullDetailOfJob = () => {
   if (!confirmed) return; 
   try
   { 
-    const response = await fetch(`/api/jobs/${id}`,{
+    const response = await fetch(`https://jsonserver-talentbase.onrender.com/jobs${id}`,{
       method: "DELETE"
     });
     

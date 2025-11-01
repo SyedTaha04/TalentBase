@@ -14,7 +14,7 @@ const JobListing = ({limit, heading = "Browse Jobs"}) => {
         {
             try
             {
-                const response = await fetch('/api/jobs');
+                const response = await fetch('https://jsonserver-talentbase.onrender.com/jobs');
                 const data = await response.json();
                 console.log(data);
                 setJobDetails(data);

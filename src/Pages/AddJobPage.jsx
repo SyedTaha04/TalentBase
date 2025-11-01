@@ -35,7 +35,7 @@ const AddJobPage = () => {
                 };
                 try
                 {
-                    const response = await fetch('/api/jobs', {
+                    const response = await fetch('https://jsonserver-talentbase.onrender.com/jobs', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
