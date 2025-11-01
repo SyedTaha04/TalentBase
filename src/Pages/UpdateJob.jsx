@@ -24,7 +24,7 @@ const UpdateJob = () => {
             {
                 try
                 {
-                    const response = await fetch(`https://jsonserver-talentbase.onrender.com/jobs${id}`);
+                    const response = await fetch(`https://jsonserver-talentbase.onrender.com/jobs/${id}`);
                     const data = await response.json();
                     setJobType(data.type);
                     setJobTitle(data.title);
@@ -65,7 +65,7 @@ const UpdateJob = () => {
                 };
                 try
                 {
-                    const response = await fetch(`https://jsonserver-talentbase.onrender.com/jobs${id}`, {
+                    const response = await fetch(`https://jsonserver-talentbase.onrender.com/jobs/${id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
